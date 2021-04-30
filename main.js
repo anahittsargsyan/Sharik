@@ -4,8 +4,8 @@ class Ball {
 		color = 'red',
 		className = 'ball',
 		size = 100,
-		top = 0,
-		left = 0,
+		top = Math.floor(Math.random() * 700) + 100 + 'px';
+		left =  Math.floor(Math.random() * 1200) + 100 + 'px';,
 		speed = 10,
 		controlKeys = {
 			UP: "w",
@@ -34,7 +34,8 @@ class Ball {
 			this.onKeyDown(event.key);
 		});
 		const smallBall = document.getElementsByClassName('small-ball');
-
+		const balls = document.getElementsByClassName('ball')
+		console.log(balls);
 		this.smallBall = smallBall;
 		this.intervalId = null;
 	}
@@ -63,16 +64,9 @@ class Ball {
     }
   };
 
-  registerGift = (gift) => {
-  	this.gift = gift;
-}
- redBall=(redBall) =>{
- 	this.redBall = redBall;
- }
- blueBall = (blueBall) =>{
- 	this.blueBall = blueBall;
- }
-
+	registerGift = (gift) => {
+	  	this.gift = gift;
+	}
 
 	onKeyDown(key) {
 		const allowedKeys = Object.values(this.controlKeys);
@@ -117,9 +111,10 @@ class Ball {
 				this.gift.ball.style.left = Math.floor(Math.random() * 1200) + 100 + 'px';
 				this.speed -= 5*this.speed/100;
 
-				// clearInterval(this.intervalId)
 				// return
 			}
+
+			// if (this.canEat(this.ball.color)) {}
 			// if(this.redBall > this.blueBall){
 			// 	if (this.canEat(this.blueBall)){
 			// 		this.redBall.style.width = this.redBall.offsetWidth + 10 + 'px';
@@ -212,7 +207,7 @@ class Ball {
 	}
 	moveRight() {
 		this.intervalId = setInterval(() => {
-			const canMoveUp = this.ball.offsetLeft  < this.container.offsetWidth - 105;
+			const canMoveUp = this.ball.offsetLeft  < this.container.offsetWidth;
 			const left = parseInt(this.ball.style.left) +  this.speed ;
 			if(!canMoveUp){
 				// alert("Game over!")
@@ -261,7 +256,7 @@ const ball2 = new Ball({left: document.body.offsetWidth - 100, color:'blue', con
 
 
 
-const ballSmall1 = new Ball({className: 'small-ball', size:20, left:Math.floor(Math.random() * 1400) + 100, color:'yellow', top:Math.floor(Math.random() * 790) + 50, controlKeys:{
+const ballSmall1 = new Ball({className: 'small-ball', size:20, left:Math.floor(Math.random() * 1400) + 100, color:'purple', top:Math.floor(Math.random() * 790) + 50, controlKeys:{
 			UP: "",
 			DOWN: "", 
 			LEFT: "",
@@ -270,10 +265,3 @@ const ballSmall1 = new Ball({className: 'small-ball', size:20, left:Math.floor(M
 
 ball1.registerGift(ballSmall1);
 ball2.registerGift(ballSmall1);
-ball1.redBall(ball1);
-ball2.blueBall(ball2);
-
-
-	
-
-
